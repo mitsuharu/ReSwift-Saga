@@ -24,23 +24,23 @@ public func selector<State, T>(_ selector: (State) -> T) async throws -> T {
 }
 
 @discardableResult
-public func call(_ effect: @escaping Saga<Any>, _ arg: SagaAction) async -> Any {
+public func call<T>(_ effect: @escaping Saga<T>, _ arg: SagaAction) async -> T {
     return await effect(arg)
 }
 
 @discardableResult
-public func call(_ effect: @escaping Saga<Any>) async -> Any {
+public func call<T>(_ effect: @escaping Saga<T>) async -> T {
     let action = SagaAction()
     return await effect(action)
 }
 
-public func fork(_ effect: @escaping Saga<Any>, _ arg: SagaAction) async -> Void {
+public func fork<T>(_ effect: @escaping Saga<T>, _ arg: SagaAction) async -> Void {
     Task.detached{
         let _ = await effect(arg)
     }
 }
 
-public func fork(_ effect: @escaping Saga<Any>) async -> Void {
+public func fork<T>(_ effect: @escaping Saga<T>) async -> Void {
     Task.detached{
         let action = SagaAction()
         let _ = await effect(action)
@@ -56,7 +56,7 @@ public func take(_ actionType: SagaAction.Type) async -> SagaAction {
     }
 }
 
-public func takeEvery( _ actionType: SagaAction.Type, saga: @escaping Saga<Any>) {
+public func takeEvery<T>( _ actionType: SagaAction.Type, saga: @escaping Saga<T>) {
     Task.detached {
         while true {
             let action = await take(actionType)
@@ -65,7 +65,7 @@ public func takeEvery( _ actionType: SagaAction.Type, saga: @escaping Saga<Any>)
     }
 }
 
-public func takeLatest( _ actionType: SagaAction.Type, saga: @escaping Saga<Any>) {
+public func takeLatest<T>( _ actionType: SagaAction.Type, saga: @escaping Saga<T>) {
     let buffer = Buffer()
     Task.detached {
         while true {
@@ -79,7 +79,7 @@ public func takeLatest( _ actionType: SagaAction.Type, saga: @escaping Saga<Any>
     }
 }
 
-public func takeLeading( _ actionType: SagaAction.Type, saga: @escaping Saga<Any>) {
+public func takeLeading<T>( _ actionType: SagaAction.Type, saga: @escaping Saga<T>) {
     let buffer = Buffer()
     Task.detached {
         while true {
