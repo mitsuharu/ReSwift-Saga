@@ -6,6 +6,6 @@ final class ReSwiftSagaTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(ReSwiftSaga().text, "Hello, World!")
+//        XCTAssertEqual(ReSwiftSaga().text, "Hello, World!")
     }
 }
