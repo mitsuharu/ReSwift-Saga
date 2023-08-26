@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "ReSwiftSaga",
+    platforms: [.iOS("13.0")],
     products: [
         .library(
             name: "ReSwiftSaga",
