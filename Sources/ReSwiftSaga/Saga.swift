@@ -12,7 +12,9 @@ import ReSwift
  一般的に enum や struct が使われることが多いが、
  Actionのmoduleごとのグルーピングなどに継承を利用するためにclassを利用する
  */
-public class SagaAction: Action {
+open class SagaAction: Action {
+    public init(){
+    }
 }
 
 /**
