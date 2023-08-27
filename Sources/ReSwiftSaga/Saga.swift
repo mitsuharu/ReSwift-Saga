@@ -9,8 +9,10 @@ import ReSwift
 
 /**
  Action のクラス
- 一般的に enum や struct が使われることが多いが、
- Actionのmoduleごとのグルーピングなどに継承を利用するためにclassを利用する
+ 
+ @description
+ Action は一般的に enum や struct が使われることが多いが、
+ Action の module ごとのグルーピングなどに継承を利用するために class を利用する
  */
 open class SagaAction: Action {
     public init(){
@@ -18,7 +20,7 @@ open class SagaAction: Action {
 }
 
 /**
- Sagaで実行する関数の型
+ Saga で実行する関数の型
  */
 public typealias Saga<T> = (SagaAction) async -> T
 
@@ -27,10 +29,8 @@ public typealias Saga<T> = (SagaAction) async -> T
  */
 public func createSagaMiddleware<State>() -> Middleware<State> {
     return { dispatch, getState in
-        
         Channel.shared.dispatch = dispatch
         Channel.shared.getState = getState
-        
         return { next in
             return { action in
                 if let action = action as? SagaAction {
