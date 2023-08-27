@@ -19,7 +19,13 @@ final class Channel {
     public static let shared = Channel()
     private let subject = PassthroughSubject<SagaAction, Error>()
     
+    // createSagaMiddleware で Redux 内部の dispatch を取得する
+    // TODO: Optional を外したい
     public var dispatch: DispatchFunction? = nil
+    
+    // createSagaMiddleware で Redux 内部の getState を取得する
+    // TODO: Optional を外したい
+    // TODO: Any ではなく State を指定したいが、どのタイミングで行う？
     public var getState: (() -> Any?)? = nil
     
     /**
@@ -49,7 +55,7 @@ final class Channel {
     
     /**
      エラー時の処理
-     @TODO: エラーを投げるかは検討
+     TODO: エラーを投げるかは検討
      */
     private func complete(_ completion: Subscribers.Completion<Error>){
         switch completion {

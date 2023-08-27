@@ -20,5 +20,5 @@ let requestUserSaga: Saga = { action async in
     try? await Task.sleep(nanoseconds: 1_000_000_000)
     
     let name = "id-" + action.userID + "-dummy-user-" + String( Int.random(in: 0..<100))
-    put(StoreUserName(name: name))
+    await put(StoreUserName(name: name))
 }

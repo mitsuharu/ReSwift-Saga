@@ -7,7 +7,7 @@
 
 import Foundation
 
-public func put(_ action: SagaAction) {
+public func put(_ action: SagaAction) async {
     if let dispatch = Channel.shared.dispatch {
         Task.detached { @MainActor in
             dispatch(action)
