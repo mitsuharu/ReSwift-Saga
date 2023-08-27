@@ -15,12 +15,13 @@ public func put(_ action: SagaAction) {
     }
 }
 
-public func selector<State, T>(_ selector: (State) -> T) async throws -> T {
-    if let getState = Channel.shared.getState,
-       let state = getState() as? State  {
-      return selector(state)
+public func selector<State, T>(_ selector: (State) -> T) async -> T? {
+    guard
+        let getState = Channel.shared.getState,
+        let state = getState() as? State else {
+      return nil
     }
-    throw SagaError.invalid
+    return selector(state)
 }
 
 @discardableResult

@@ -54,9 +54,9 @@ final class Channel {
     private func complete(_ completion: Subscribers.Completion<Error>){
         switch completion {
         case .finished:
-            print("Channel#finished")
+            print("Channel#complete finished")
         case .failure(let error):
-            assertionFailure("Channel#failure \(error)")
+            assertionFailure("Channel#complete failure \(error)")
         }
     }
 }
