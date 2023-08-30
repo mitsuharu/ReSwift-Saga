@@ -1,11 +1,13 @@
 //
 //  Effects.swift
-// 
+//  ReSwift-Saga
 //
 //  Created by Mitsuharu Emoto on 2023/08/26.
 //
 
 import Foundation
+
+private struct Sagable: SagaAction {}
 
 public func put(_ action: SagaAction) async {
     if let dispatch = Channel.shared.dispatch {
@@ -31,8 +33,7 @@ public func call<T>(_ effect: @escaping Saga<T>, _ arg: SagaAction) async -> T {
 
 @discardableResult
 public func call<T>(_ effect: @escaping Saga<T>) async -> T {
-    let action = SagaAction()
-    return await effect(action)
+    return await effect(Sagable())
 }
 
 public func fork<T>(_ effect: @escaping Saga<T>, _ arg: SagaAction) async -> Void {
@@ -43,8 +44,7 @@ public func fork<T>(_ effect: @escaping Saga<T>, _ arg: SagaAction) async -> Voi
 
 public func fork<T>(_ effect: @escaping Saga<T>) async -> Void {
     Task.detached{
-        let action = SagaAction()
-        let _ = await effect(action)
+        let _ = await effect(Sagable())
     }
 }
 

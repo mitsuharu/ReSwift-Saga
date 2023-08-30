@@ -34,7 +34,7 @@ final class CounterViewModel: ObservableObject, StoreSubscriber {
     }
     
     public func move(count: Int) {
-        appStore.dispatch(Move(count: count))
+        appStore.dispatch(Assign(count: count))
     }
 
     public func clear() {
