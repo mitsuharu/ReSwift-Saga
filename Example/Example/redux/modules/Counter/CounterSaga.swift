@@ -11,7 +11,7 @@ import ReSwiftSaga
 let counterSaga: Saga = { _ in
     takeEvery(Increase.self, saga: increaseSaga)
     takeLatest(Decrease.self, saga: decreaseSaga)
-    takeLeading(Move.self, saga: moveSaga)
+    takeLeading(Assign.self, saga: assignSaga)
 }
 
 private let increaseSaga: Saga = { action async in
@@ -31,8 +31,8 @@ private let decreaseSaga: Saga = { action async in
     print("decreaseSaga#end", action )
 }
 
-private let moveSaga: Saga = { action async in
-    guard let move = action as? Move else {
+private let assignSaga: Saga = { action async in
+    guard let move = action as? Assign else {
         return
     }
 

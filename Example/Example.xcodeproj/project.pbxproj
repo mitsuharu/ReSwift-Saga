@@ -178,9 +178,9 @@
 		9B6E6A9E2A9A0F6A0097D20A /* User */ = {
 			isa = PBXGroup;
 			children = (
+				9B6E6AA12A9A0F6A0097D20A /* UserAction.swift */,
 				9B6E6A9F2A9A0F6A0097D20A /* UserReducer.swift */,
 				9B6E6AA02A9A0F6A0097D20A /* UserSaga.swift */,
-				9B6E6AA12A9A0F6A0097D20A /* UserAction.swift */,
 				9B6E6AA22A9A0F6A0097D20A /* UserSelectors.swift */,
 				9B6E6AA32A9A0F6A0097D20A /* UserState.swift */,
 			);
@@ -190,11 +190,11 @@
 		9B6E6AA42A9A0F6A0097D20A /* Counter */ = {
 			isa = PBXGroup;
 			children = (
-				9B6E6AA52A9A0F6A0097D20A /* CounterSaga.swift */,
+				9B6E6AA92A9A0F6A0097D20A /* CounterAction.swift */,
 				9B6E6AA62A9A0F6A0097D20A /* CounterReducer.swift */,
+				9B6E6AA52A9A0F6A0097D20A /* CounterSaga.swift */,
 				9B6E6AA72A9A0F6A0097D20A /* CounterSelectors.swift */,
 				9B6E6AA82A9A0F6A0097D20A /* CounterState.swift */,
-				9B6E6AA92A9A0F6A0097D20A /* CounterAction.swift */,
 			);
 			path = Counter;
 			sourceTree = "<group>";

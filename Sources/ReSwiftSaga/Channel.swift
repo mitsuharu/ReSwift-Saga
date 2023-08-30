@@ -1,6 +1,6 @@
 //
 //  Channel.swift
-// 
+//  ReSwift-Saga
 //
 //  Created by Mitsuharu Emoto on 2023/08/26.
 //

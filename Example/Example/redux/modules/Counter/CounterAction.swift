@@ -12,7 +12,7 @@ protocol CounterAction: SagaAction {}
 
 struct Increase: CounterAction {}
 struct Decrease: CounterAction {}
-struct Move: CounterAction {
+struct Assign: CounterAction {
     let count: Int
 }
 struct Clear: CounterAction {}
