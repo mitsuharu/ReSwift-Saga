@@ -18,7 +18,7 @@ func makeAppStore() -> Store<AppState> {
         state: AppState.initialState(),
         middleware: [sagaMiddleware]
     )
-
+    
     Task.detached {
         await fork(appSage)
     }

@@ -1,6 +1,6 @@
 //
 //  Saga.swift
-// 
+//  ReSwift-Saga
 //
 //  Created by Mitsuharu Emoto on 2023/08/26.
 //
@@ -8,29 +8,69 @@
 import ReSwift
 
 /**
- Action のクラス
+ protocal for Sagable Action
  
  @description
- Action は一般的に enum や struct が使われることが多いが、
- Action の module ごとのグルーピングなどに継承を利用するために class を利用する
+ ReSwift-Saga requires to define Actions as struct,
+ it does not support enum.
+ 
+ @example
+ ```swift
+ import ReSwiftSaga
+
+ protocol CounterAction: SagaAction {}
+
+ struct Increase: CounterAction {}
+ struct Decrease: CounterAction {}
+ struct Assign: CounterAction {
+     let count: Int
+ }
+ ```
  */
-open class SagaAction: Action {
-    public init(){
-    }
+public protocol SagaAction: Action {
 }
 
 /**
- Saga で実行する関数の型
+ It is type of function to execute in Saga.
+ 
+ @example
+ ```swift
+ let requestUserSaga: Saga = { action async in
+     guard let action = action as? RequestUser else {
+         return
+     }
+     try? await Task.sleep(nanoseconds: 1_000_000_000)
+     await put(StoreUserName(name: "user_name"))
+ }
+ ```
  */
 public typealias Saga<T> = (SagaAction) async -> T
 
 /**
- Saga 向けの middleware
+ It makes a middleware for Saga
+ 
+ @example
+ ```swift
+ import ReSwift
+ import ReSwiftSaga
+
+ func makeAppStore() -> Store<AppState> {
+     let sagaMiddleware: Middleware<AppState> = createSagaMiddleware()
+     return Store<AppState>(
+         reducer: appReducer,
+         state: AppState.initialState(),
+         middleware: [sagaMiddleware]
+     )
+ }
+ ```
  */
 public func createSagaMiddleware<State>() -> Middleware<State> {
     return { dispatch, getState in
+        
+        // FIXME: To set values, we require to dispatch any actions.
         Channel.shared.dispatch = dispatch
         Channel.shared.getState = getState
+        
         return { next in
             return { action in
                 if let action = action as? SagaAction {

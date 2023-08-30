@@ -16,7 +16,7 @@ func counterReducer(action: CounterAction, state: CounterState) -> CounterState 
     case _ as Decrease:
         return CounterState(count: state.count - 1)
     
-    case let action as Move:
+    case let action as Assign:
         return CounterState(count: action.count)
     
     case _ as Clear:
