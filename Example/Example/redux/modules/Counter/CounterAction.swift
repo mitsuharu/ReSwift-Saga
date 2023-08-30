@@ -8,15 +8,13 @@
 import Foundation
 import ReSwiftSaga
 
-class CounterAction: SagaAction {}
+protocol CounterAction: SagaAction {}
 
-final class Increase: CounterAction {}
-final class Decrease: CounterAction {}
-final class Move: CounterAction {
+struct Increase: CounterAction {}
+struct Decrease: CounterAction {}
+struct Move: CounterAction {
     let count: Int
-    init(count: Int) {
-        self.count = count
-    }
 }
-final class Clear: CounterAction {}
+struct Clear: CounterAction {}
+
 

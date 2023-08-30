@@ -8,15 +8,26 @@
 import ReSwift
 
 /**
- Action のクラス
+ protocal for Sagable Action
  
  @description
- Action は一般的に enum や struct が使われることが多いが、
- Action の module ごとのグルーピングなどに継承を利用するために class を利用する
+ ReSwift-Saga requires to define Actions as struct,
+ it does not support enum.
+ 
+ @example
+ ```swift
+ import ReSwiftSaga
+
+ protocol CounterAction: SagaAction {}
+
+ struct Increase: CounterAction {}
+ struct Decrease: CounterAction {}
+ struct Assign: CounterAction {
+     let count: Int
+ }
+ ```
  */
-open class SagaAction: Action {
-    public init(){
-    }
+public protocol SagaAction: Action {
 }
 
 /**
