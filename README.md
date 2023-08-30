@@ -1,17 +1,21 @@
 ReSwift-Saga
 ==
 
-:::
-現在開発中です
-under development
-:::
+```test
+現在開発中です。
+```
 
-- [Redux Saga](https://redux-saga.js.org/) を Swift で再現したサンプルプロジェクトです。
+- ReSwift 向けに [Redux Saga](https://redux-saga.js.org/) を再現したプロジェクトです
 - 完全再現ではなく、設計思想を参考にしつつ、一部機能を再現しています
 
 ## Develop
 
 - Xcode 14.3.1
+- iOS 13.0 以上をサポートしています
+
+### Contributing
+
+- 準備中
 
 
 ## EFFECTS
@@ -70,24 +74,20 @@ func makeAppStore() -> Store<AppState> {
 
 ### Action
 
-- Action は class で生成します
+- Action は struct で生成します
 
 
 ```swift
-class UserAction: SagaAction {}
+import ReSwiftSaga
 
-class RequestUser: UserAction {
+protocol UserAction: SagaAction {}
+
+struct RequestUser: UserAction {
     let userID: String
-    init(userID: String) {
-        self.userID = userID
-    }
 }
 
-class StoreUserName: UserAction {
+struct StoreUserName: UserAction {
     let name: String
-    init(name: String) {
-        self.name = name
-    }
 }
 ```
 
