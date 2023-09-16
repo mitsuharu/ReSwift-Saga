@@ -1,10 +1,6 @@
 ReSwift-Saga
 ==
 
-```test
-現在開発中です。
-```
-
 - ReSwift 向けに [Redux Saga](https://redux-saga.js.org/) を再現したプロジェクトです
 - 完全再現ではなく、設計思想を参考にしつつ、一部機能を再現しています
 
@@ -37,19 +33,22 @@ We requires [ReSwift](https://github.com/ReSwift/ReSwift) (~> 6.1.0).
 
 ### Swift Package Manager
 
-```Swift
-import PackageDescription
+Xcode から設定する、または `Package.swift` の `dependencies ` を編集してください。
 
-let package = Package(
-    [...]
-    dependencies: [
-        .Package(url: "https://github.com/mitsuharu/ReSwift-Saga.git", majorVersion: XYZ)
-    ]
-)
+```Swift
+dependencies: [
+	.Package(url: "https://github.com/mitsuharu/ReSwift-Saga.git", upToNextMajor: "x.y.z")
+]
 ```
+
+### CocoaPods
+
+not yet
 
 
 ## USAGE
+
+- 詳しくは Example を見てください
 
 ### Redux
 
@@ -75,6 +74,7 @@ func makeAppStore() -> Store<AppState> {
 ### Action
 
 - Action は struct で生成します
+- enum はサポートしていません
 
 
 ```swift
@@ -106,12 +106,14 @@ let requestUserSaga: Saga = { action async in
     try? await Task.sleep(nanoseconds: 1_000_000_000)
     
     let name = "dummy-user-" + String( Int.random(in: 0..<100))
-    put(StoreUserName(name: name))
+    try? await put(StoreUserName(name: name))
 }
 ```
 
 
 ### dispatch
+
+- ViewModel での実装例です
 
 ```swift
 import Foundation
