@@ -16,7 +16,7 @@ final class ReSwiftSagaTests: XCTestCase {
     func testPutExample() async throws {
 
         let nextCount = 1234
-        let subscriber = TestFilteredSubscriber<Int>()
+        let subscriber = StateSubscriber<Int>()
         
         store.subscribe(subscriber) {
             $0.select { $0.count }
@@ -30,7 +30,7 @@ final class ReSwiftSagaTests: XCTestCase {
         // put が非同期実行なので、待つ
         try? await Task.sleep(nanoseconds: 1_000_000_000)
         
-        XCTAssertEqual(subscriber.receivedValue, nextCount)
+        XCTAssertEqual(subscriber.value, nextCount)
     }
     
     func testSelectorExample() async throws {
@@ -43,6 +43,7 @@ final class ReSwiftSagaTests: XCTestCase {
         
         let count = await selector(selectCount)
         guard let count = count else {
+            XCTFail("There is not count.")
             return
         }
         XCTAssertEqual(count, nextCount)
