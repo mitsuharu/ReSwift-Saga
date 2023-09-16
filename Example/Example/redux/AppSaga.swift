@@ -12,6 +12,7 @@ let appSage: Saga = { _ async in
     do {
         try await fork(counterSaga)
         try await fork(userSaga)
+        try await fork(toastSaga)
     } catch {
         print(error)
     }

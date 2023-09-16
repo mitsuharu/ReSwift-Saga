@@ -17,6 +17,9 @@ struct UserView: View {
                 Button("requestUser") {
                     viewModel.requestUser()
                 }
+                Button("showByToast") {
+                    viewModel.showByToast()
+                }
                 Button("clearUser") {
                     viewModel.clearUser()
                 }
