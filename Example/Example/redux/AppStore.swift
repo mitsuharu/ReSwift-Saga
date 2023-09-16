@@ -20,7 +20,11 @@ func makeAppStore() -> Store<AppState> {
     )
     
     Task.detached {
-        await fork(appSage)
+        do {
+            try await fork(appSage)
+        } catch {
+            print(error)
+        }
     }
     
     return store

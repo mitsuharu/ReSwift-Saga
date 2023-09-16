@@ -44,7 +44,7 @@ public protocol SagaAction: Action {
  }
  ```
  */
-public typealias Saga<T> = (SagaAction) async -> T
+public typealias Saga<T> = (SagaAction) async throws -> T
 
 /**
  It makes a middleware for Saga
