@@ -9,6 +9,11 @@ import Foundation
 import ReSwiftSaga
 
 let appSage: Saga = { _ async in
-    await fork(counterSaga)
-    await fork(userSaga)
+    do {
+        try await fork(counterSaga)
+        try await fork(userSaga)
+        try await fork(toastSaga)
+    } catch {
+        print(error)
+    }
 }

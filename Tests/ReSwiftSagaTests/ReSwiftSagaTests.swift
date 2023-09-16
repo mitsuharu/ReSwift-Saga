@@ -13,10 +13,10 @@ final class ReSwiftSagaTests: XCTestCase {
         super.tearDown()
     }
     
-    func testPutExample() async throws {
+    func testPut() async throws {
 
         let nextCount = 1234
-        let subscriber = TestFilteredSubscriber<Int>()
+        let subscriber = StateSubscriber<Int>()
         
         store.subscribe(subscriber) {
             $0.select { $0.count }
@@ -25,15 +25,15 @@ final class ReSwiftSagaTests: XCTestCase {
         // 現状だと、一度何しからの dispatch をしないと、put が有効にならない
         store.dispatch(Clear())
 
-        await put(Move(count: nextCount))
+        try? await put(Move(count: nextCount))
         
         // put が非同期実行なので、待つ
         try? await Task.sleep(nanoseconds: 1_000_000_000)
         
-        XCTAssertEqual(subscriber.receivedValue, nextCount)
+        XCTAssertEqual(subscriber.value, nextCount)
     }
     
-    func testSelectorExample() async throws {
+    func testSelector() async throws {
         let nextCount = 10
         store.dispatch(Move(count: nextCount))
         
@@ -41,10 +41,29 @@ final class ReSwiftSagaTests: XCTestCase {
             store.count
         }
         
-        let count = await selector(selectCount)
-        guard let count = count else {
-            return
+        do {
+            let count = try await selector(selectCount)
+            XCTAssertEqual(count, nextCount)
+        } catch {
+            print(error)
+            XCTFail(error.localizedDescription)
         }
-        XCTAssertEqual(count, nextCount)
+    }
+    
+    
+    func testTake() async throws {
+        
+        let expectation = expectation(description: "test take")
+        Task.detached {
+            let action = await take(Increase.self)
+            XCTAssertTrue(action is Increase)
+            expectation.fulfill()
+        }
+        
+        // Task.detached で take の準備が揃うまで待つ（要修正）
+        try? await Task.sleep(nanoseconds: 1_000_000)
+        store.dispatch(Increase())
+          
+        await fulfillment(of: [expectation], timeout: 1.0, enforceOrder: false)
     }
 }

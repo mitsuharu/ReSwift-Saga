@@ -16,15 +16,10 @@ struct State {
     }
 }
 
-final class Increase: SagaAction {}
-final class Decrease: SagaAction {}
-final class Move: SagaAction {
-    let count: Int
-    init(count: Int) {
-        self.count = count
-    }
-}
-final class Clear: SagaAction {}
+struct Increase: SagaAction {}
+struct Decrease: SagaAction {}
+struct Move: SagaAction { let count: Int }
+struct Clear: SagaAction {}
 
 func reducer(action: Action, state: State?) -> State {
 

@@ -26,6 +26,10 @@
 		9B6E6AB52A9A0F6A0097D20A /* CounterSelectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6E6AA72A9A0F6A0097D20A /* CounterSelectors.swift */; };
 		9B6E6AB62A9A0F6A0097D20A /* CounterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6E6AA82A9A0F6A0097D20A /* CounterState.swift */; };
 		9B6E6AB72A9A0F6A0097D20A /* CounterAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6E6AA92A9A0F6A0097D20A /* CounterAction.swift */; };
+		9B809B432AB57BB200349BFE /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 9B809B422AB57BB200349BFE /* AlertToast */; };
+		9B809B4B2AB57DFE00349BFE /* ToastAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B809B4A2AB57DFE00349BFE /* ToastAction.swift */; };
+		9B809B4D2AB57E2900349BFE /* ToastSaga.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B809B4C2AB57E2900349BFE /* ToastSaga.swift */; };
+		9B809B4F2AB582B700349BFE /* ToastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B809B4E2AB582B700349BFE /* ToastViewModel.swift */; };
 		BC4A53422A99E7DC00E78D57 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4A53412A99E7DC00E78D57 /* ExampleApp.swift */; };
 		BC4A53462A99E7DD00E78D57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC4A53452A99E7DD00E78D57 /* Assets.xcassets */; };
 		BC4A534A2A99E7DD00E78D57 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC4A53492A99E7DD00E78D57 /* Preview Assets.xcassets */; };
@@ -72,6 +76,9 @@
 		9B6E6AA72A9A0F6A0097D20A /* CounterSelectors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterSelectors.swift; sourceTree = "<group>"; };
 		9B6E6AA82A9A0F6A0097D20A /* CounterState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterState.swift; sourceTree = "<group>"; };
 		9B6E6AA92A9A0F6A0097D20A /* CounterAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterAction.swift; sourceTree = "<group>"; };
+		9B809B4A2AB57DFE00349BFE /* ToastAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastAction.swift; sourceTree = "<group>"; };
+		9B809B4C2AB57E2900349BFE /* ToastSaga.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastSaga.swift; sourceTree = "<group>"; };
+		9B809B4E2AB582B700349BFE /* ToastViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastViewModel.swift; sourceTree = "<group>"; };
 		BC4A533E2A99E7DC00E78D57 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC4A53412A99E7DC00E78D57 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		BC4A53452A99E7DD00E78D57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -91,6 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC4A536F2A99E7F400E78D57 /* ReSwiftSaga in Frameworks */,
+				9B809B432AB57BB200349BFE /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +158,7 @@
 		9B6E6A702A9A07CC0097D20A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				9B809B4E2AB582B700349BFE /* ToastViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -169,6 +178,7 @@
 		9B6E6A9D2A9A0F6A0097D20A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				9B809B492AB57DED00349BFE /* Toast */,
 				9B6E6A9E2A9A0F6A0097D20A /* User */,
 				9B6E6AA42A9A0F6A0097D20A /* Counter */,
 			);
@@ -197,6 +207,15 @@
 				9B6E6AA82A9A0F6A0097D20A /* CounterState.swift */,
 			);
 			path = Counter;
+			sourceTree = "<group>";
+		};
+		9B809B492AB57DED00349BFE /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				9B809B4A2AB57DFE00349BFE /* ToastAction.swift */,
+				9B809B4C2AB57E2900349BFE /* ToastSaga.swift */,
+			);
+			path = Toast;
 			sourceTree = "<group>";
 		};
 		BC4A53352A99E7DC00E78D57 = {
@@ -285,6 +304,7 @@
 			name = Example;
 			packageProductDependencies = (
 				BC4A536E2A99E7F400E78D57 /* ReSwiftSaga */,
+				9B809B422AB57BB200349BFE /* AlertToast */,
 			);
 			productName = Example;
 			productReference = BC4A533E2A99E7DC00E78D57 /* Example.app */;
@@ -358,6 +378,9 @@
 				Base,
 			);
 			mainGroup = BC4A53352A99E7DC00E78D57;
+			packageReferences = (
+				9B809B412AB57BB200349BFE /* XCRemoteSwiftPackageReference "AlertToast" */,
+			);
 			productRefGroup = BC4A533F2A99E7DC00E78D57 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -400,6 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B809B4B2AB57DFE00349BFE /* ToastAction.swift in Sources */,
 				9B6E6AAE2A9A0F6A0097D20A /* UserReducer.swift in Sources */,
 				9B6E6A872A9A07CC0097D20A /* UserView.swift in Sources */,
 				9B6E6AB02A9A0F6A0097D20A /* UserAction.swift in Sources */,
@@ -407,9 +431,11 @@
 				9B6E6AB72A9A0F6A0097D20A /* CounterAction.swift in Sources */,
 				9B6E6A882A9A07CC0097D20A /* CounterView.swift in Sources */,
 				9B6E6AAA2A9A0F6A0097D20A /* AppState.swift in Sources */,
+				9B809B4D2AB57E2900349BFE /* ToastSaga.swift in Sources */,
 				9B6E6AB22A9A0F6A0097D20A /* UserState.swift in Sources */,
 				9B6E6AB52A9A0F6A0097D20A /* CounterSelectors.swift in Sources */,
 				9B6E6AAC2A9A0F6A0097D20A /* AppReducer.swift in Sources */,
+				9B809B4F2AB582B700349BFE /* ToastViewModel.swift in Sources */,
 				9B6E6AB32A9A0F6A0097D20A /* CounterSaga.swift in Sources */,
 				BC4A53422A99E7DC00E78D57 /* ExampleApp.swift in Sources */,
 				9B6E6A892A9A07CC0097D20A /* CounterViewModel.swift in Sources */,
@@ -768,7 +794,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		9B809B412AB57BB200349BFE /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		9B809B422AB57BB200349BFE /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B809B412AB57BB200349BFE /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
 		BC4A536E2A99E7F400E78D57 /* ReSwiftSaga */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ReSwiftSaga;

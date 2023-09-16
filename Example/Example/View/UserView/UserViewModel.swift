@@ -29,6 +29,11 @@ final class UserViewModel: ObservableObject, StoreSubscriber {
         appStore.dispatch(RequestUser(userID: "1234"))
     }
     
+    public func showByToast() {
+        let message = "name is " + (name.isEmpty ? "none" : name)
+        appStore.dispatch(ShowToast(message: message))
+    }
+    
     public func clearUser() {
         appStore.dispatch(ClearUser())
     }
