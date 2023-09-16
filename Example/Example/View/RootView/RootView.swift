@@ -6,21 +6,18 @@
 //
 
 import SwiftUI
-import AlertToast
 
 struct RootView: View {
-    
-    @ObservedObject private var viewModel = ToastViewModel.shared
-    
+        
     var body: some View {
         NavigationView {
             VStack{
                 CounterView()
                 UserView()
-            }.toast(isPresenting: $viewModel.showToast) {
-                AlertToast(type: .regular, title: viewModel.message)
             }
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .modifier(Toast())
     }
 }
 
