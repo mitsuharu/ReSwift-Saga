@@ -30,6 +30,7 @@
 		9B809B4B2AB57DFE00349BFE /* ToastAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B809B4A2AB57DFE00349BFE /* ToastAction.swift */; };
 		9B809B4D2AB57E2900349BFE /* ToastSaga.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B809B4C2AB57E2900349BFE /* ToastSaga.swift */; };
 		9B809B4F2AB582B700349BFE /* ToastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B809B4E2AB582B700349BFE /* ToastViewModel.swift */; };
+		9B809B562AB5A01F00349BFE /* ToastModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B809B552AB5A01F00349BFE /* ToastModifier.swift */; };
 		BC4A53422A99E7DC00E78D57 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4A53412A99E7DC00E78D57 /* ExampleApp.swift */; };
 		BC4A53462A99E7DD00E78D57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC4A53452A99E7DD00E78D57 /* Assets.xcassets */; };
 		BC4A534A2A99E7DD00E78D57 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC4A53492A99E7DD00E78D57 /* Preview Assets.xcassets */; };
@@ -79,6 +80,7 @@
 		9B809B4A2AB57DFE00349BFE /* ToastAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastAction.swift; sourceTree = "<group>"; };
 		9B809B4C2AB57E2900349BFE /* ToastSaga.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastSaga.swift; sourceTree = "<group>"; };
 		9B809B4E2AB582B700349BFE /* ToastViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastViewModel.swift; sourceTree = "<group>"; };
+		9B809B552AB5A01F00349BFE /* ToastModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastModifier.swift; sourceTree = "<group>"; };
 		BC4A533E2A99E7DC00E78D57 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC4A53412A99E7DC00E78D57 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		BC4A53452A99E7DD00E78D57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -158,7 +160,6 @@
 		9B6E6A702A9A07CC0097D20A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				9B809B4E2AB582B700349BFE /* ToastViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -218,6 +219,23 @@
 			path = Toast;
 			sourceTree = "<group>";
 		};
+		9B809B532AB59FDB00349BFE /* ViewModifier */ = {
+			isa = PBXGroup;
+			children = (
+				9B809B542AB59FE700349BFE /* ToastModifier */,
+			);
+			path = ViewModifier;
+			sourceTree = "<group>";
+		};
+		9B809B542AB59FE700349BFE /* ToastModifier */ = {
+			isa = PBXGroup;
+			children = (
+				9B809B552AB5A01F00349BFE /* ToastModifier.swift */,
+				9B809B4E2AB582B700349BFE /* ToastViewModel.swift */,
+			);
+			path = ToastModifier;
+			sourceTree = "<group>";
+		};
 		BC4A53352A99E7DC00E78D57 = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +263,7 @@
 			children = (
 				9B6E6A982A9A0F6A0097D20A /* Redux */,
 				9B6E6A652A9A07CC0097D20A /* View */,
+				9B809B532AB59FDB00349BFE /* ViewModifier */,
 				9B6E6A702A9A07CC0097D20A /* ViewModel */,
 				BC4A53412A99E7DC00E78D57 /* ExampleApp.swift */,
 				BC4A53452A99E7DD00E78D57 /* Assets.xcassets */,
@@ -439,6 +458,7 @@
 				9B6E6AB32A9A0F6A0097D20A /* CounterSaga.swift in Sources */,
 				BC4A53422A99E7DC00E78D57 /* ExampleApp.swift in Sources */,
 				9B6E6A892A9A07CC0097D20A /* CounterViewModel.swift in Sources */,
+				9B809B562AB5A01F00349BFE /* ToastModifier.swift in Sources */,
 				9B6E6AB42A9A0F6A0097D20A /* CounterReducer.swift in Sources */,
 				9B6E6AAF2A9A0F6A0097D20A /* UserSaga.swift in Sources */,
 				9B6E6AAB2A9A0F6A0097D20A /* AppSaga.swift in Sources */,
