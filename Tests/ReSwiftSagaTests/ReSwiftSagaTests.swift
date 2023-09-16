@@ -25,7 +25,7 @@ final class ReSwiftSagaTests: XCTestCase {
         // 現状だと、一度何しからの dispatch をしないと、put が有効にならない
         store.dispatch(Clear())
 
-        await put(Move(count: nextCount))
+        try? await put(Move(count: nextCount))
         
         // put が非同期実行なので、待つ
         try? await Task.sleep(nanoseconds: 1_000_000_000)
@@ -41,11 +41,12 @@ final class ReSwiftSagaTests: XCTestCase {
             store.count
         }
         
-        let count = await selector(selectCount)
-        guard let count = count else {
-            XCTFail("There is not count.")
-            return
+        do {
+            let count = try await selector(selectCount)
+            XCTAssertEqual(count, nextCount)
+        } catch {
+            print(error)
+            XCTFail(error.localizedDescription)
         }
-        XCTAssertEqual(count, nextCount)
     }
 }

@@ -40,7 +40,7 @@ public protocol SagaAction: Action {
          return
      }
      try? await Task.sleep(nanoseconds: 1_000_000_000)
-     await put(StoreUserName(name: "user_name"))
+     try? await put(StoreUserName(name: "user_name"))
  }
  ```
  */

@@ -9,19 +9,45 @@ import Foundation
 
 private struct Sagable: SagaAction {}
 
-public func put(_ action: SagaAction) async {
-    if let dispatch = Channel.shared.dispatch {
-        Task.detached { @MainActor in
-            dispatch(action)
-        }
+/**
+ Saga middlware dispatches Action to the store.
+ 
+ @example
+ ```swift
+ do {
+    try await put(Increase())
+ } catch {
+    print(error)
+ }
+ ```
+ */
+public func put(_ action: SagaAction) async throws {
+    guard let dispatch = Channel.shared.dispatch else{
+        throw SagaError.middlewareFailed(message: "SagaMiddleware has not prepared dispatch.")
+    }
+    Task.detached { @MainActor in
+        dispatch(action)
     }
 }
 
-public func selector<State, T>(_ selector: (State) -> T) async -> T? {
+/**
+ Saga middlware invokes selector on the current Store's state.
+ 
+ @example
+ ```swift
+ do {
+    let count = try await selector(selectorCount)
+ } catch {
+    print(error)
+ }
+ ```
+ */
+public func selector<State, T>(_ selector: (State) -> T) async throws -> T {
     guard
         let getState = Channel.shared.getState,
-        let state = getState() as? State else {
-      return nil
+        let state = getState() as? State else
+    {
+        throw SagaError.middlewareFailed(message: "SagaMiddleware has not prepared getState.")
     }
     return selector(state)
 }
