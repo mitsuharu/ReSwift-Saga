@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum SagaError: Error {
+public enum SagaError: Error {
     
     /**
      Middleware に起因したエラーです。

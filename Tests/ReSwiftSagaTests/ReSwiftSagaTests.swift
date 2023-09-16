@@ -13,7 +13,7 @@ final class ReSwiftSagaTests: XCTestCase {
         super.tearDown()
     }
     
-    func testPutExample() async throws {
+    func testPut() async throws {
 
         let nextCount = 1234
         let subscriber = StateSubscriber<Int>()
@@ -33,7 +33,7 @@ final class ReSwiftSagaTests: XCTestCase {
         XCTAssertEqual(subscriber.value, nextCount)
     }
     
-    func testSelectorExample() async throws {
+    func testSelector() async throws {
         let nextCount = 10
         store.dispatch(Move(count: nextCount))
         
@@ -48,5 +48,22 @@ final class ReSwiftSagaTests: XCTestCase {
             print(error)
             XCTFail(error.localizedDescription)
         }
+    }
+    
+    
+    func testTake() async throws {
+        
+        let expectation = expectation(description: "test take")
+        Task.detached {
+            let action = await take(Increase.self)
+            XCTAssertTrue(action is Increase)
+            expectation.fulfill()
+        }
+        
+        // Task.detached で take の準備が揃うまで待つ（要修正）
+        try? await Task.sleep(nanoseconds: 1_000_000)
+        store.dispatch(Increase())
+          
+        await fulfillment(of: [expectation], timeout: 1.0, enforceOrder: false)
     }
 }
