@@ -114,7 +114,7 @@ public func fork<T>(_ effect: @escaping Saga<T>) async rethrows -> Void {
   
  @example
  ```swift
- while(true) {
+ while true {
     let action = await take(RequestUser.self)
     print(action)
  }
