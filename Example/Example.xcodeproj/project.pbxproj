@@ -157,13 +157,6 @@
 			path = CounterView;
 			sourceTree = "<group>";
 		};
-		9B6E6A702A9A07CC0097D20A /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		9B6E6A982A9A0F6A0097D20A /* Redux */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,7 +257,6 @@
 				9B6E6A982A9A0F6A0097D20A /* Redux */,
 				9B6E6A652A9A07CC0097D20A /* View */,
 				9B809B532AB59FDB00349BFE /* ViewModifier */,
-				9B6E6A702A9A07CC0097D20A /* ViewModel */,
 				BC4A53412A99E7DC00E78D57 /* ExampleApp.swift */,
 				BC4A53452A99E7DD00E78D57 /* Assets.xcassets */,
 				BC4A53472A99E7DD00E78D57 /* Example.entitlements */,
