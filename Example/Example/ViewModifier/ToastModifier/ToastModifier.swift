@@ -8,7 +8,7 @@
 import SwiftUI
 import AlertToast
 
-struct Toast: ViewModifier {
+struct ToastModifier: ViewModifier {
     
     @ObservedObject private var viewModel = ToastViewModel.shared
  

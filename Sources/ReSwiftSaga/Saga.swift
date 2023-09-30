@@ -68,13 +68,13 @@ public func createSagaMiddleware<State>() -> Middleware<State> {
     return { dispatch, getState in
         
         // FIXME: To set values, we require to dispatch any actions.
-        Channel.shared.dispatch = dispatch
-        Channel.shared.getState = getState
+        InternalBridge.shared.dispatch = dispatch
+        InternalBridge.shared.getState = getState
         
         return { next in
             return { action in
                 if let action = action as? SagaAction {
-                    Channel.shared.put(action)
+                    InternalBridge.shared.put(action)
                 }
                 return next(action)
             }
