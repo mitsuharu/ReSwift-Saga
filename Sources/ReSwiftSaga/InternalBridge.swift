@@ -1,5 +1,5 @@
 //
-//  Channel.swift
+//  InternalBridge.swift
 //  ReSwift-Saga
 //
 //  Created by Mitsuharu Emoto on 2023/08/26.
@@ -10,13 +10,13 @@ import Combine
 import ReSwift
 
 /**
- Channel
- - Saga に Action を通知する
- - 特定の Action の監視する
+ InternalBridge
+ - Redux と Redux Saga 間のデータ受取を管理する
+ - Action の発行や監視を行う
  */
-final class Channel {
+final class InternalBridge {
     
-    static let shared = Channel()
+    static let shared = InternalBridge()
     private let subject = PassthroughSubject<SagaAction, Error>()
     
     // createSagaMiddleware で Redux 内部の dispatch を取得する

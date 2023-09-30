@@ -17,7 +17,7 @@ struct RootView: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .modifier(Toast())
+        .modifier(ToastModifier())
     }
 }
 
