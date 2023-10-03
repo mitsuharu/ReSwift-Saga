@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import ReSwiftSaga
+import ReSwift
 
-protocol CounterAction: SagaAction {}
+protocol CounterAction: Action {}
 
 struct Increase: CounterAction {}
 struct Decrease: CounterAction {}

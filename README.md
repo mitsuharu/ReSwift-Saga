@@ -45,7 +45,6 @@ dependencies: [
 
 not yet
 
-
 ## USAGE
 
 - 詳しくは Example を見てください
@@ -58,7 +57,7 @@ not yet
 ```swift
 func makeAppStore() -> Store<AppState> {
     
-    // Saga 用の middeware を生成する
+    // Saga 用の middleware を生成する
     let sagaMiddleware: Middleware<AppState> = createSagaMiddleware()
     
     let store = Store<AppState>(
@@ -78,9 +77,9 @@ func makeAppStore() -> Store<AppState> {
 
 
 ```swift
-import ReSwiftSaga
+import ReSwift
 
-protocol UserAction: SagaAction {}
+protocol UserAction: Action {}
 
 struct RequestUser: UserAction {
     let userID: String

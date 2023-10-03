@@ -8,29 +8,6 @@
 import ReSwift
 
 /**
- protocal for Sagable Action
- 
- @description
- ReSwift-Saga requires to define Actions as struct,
- it does not support enum.
- 
- @example
- ```swift
- import ReSwiftSaga
-
- protocol CounterAction: SagaAction {}
-
- struct Increase: CounterAction {}
- struct Decrease: CounterAction {}
- struct Assign: CounterAction {
-     let count: Int
- }
- ```
- */
-public protocol SagaAction: Action {
-}
-
-/**
  It is type of function to execute in Saga.
  
  @example
@@ -44,7 +21,7 @@ public protocol SagaAction: Action {
  }
  ```
  */
-public typealias Saga<T> = (SagaAction) async throws -> T
+public typealias Saga<T> = (Action) async throws -> T
 
 /**
  It makes a middleware for Saga
@@ -73,9 +50,7 @@ public func createSagaMiddleware<State>() -> Middleware<State> {
         
         return { next in
             return { action in
-                if let action = action as? SagaAction {
-                    InternalBridge.shared.put(action)
-                }
+                InternalBridge.shared.put(action)
                 return next(action)
             }
         }

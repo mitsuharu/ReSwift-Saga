@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import ReSwiftSaga
+import ReSwift
 
-protocol ToastAction: SagaAction {}
+protocol ToastAction: Action {}
 
 struct ShowToast: ToastAction {
     let message: String

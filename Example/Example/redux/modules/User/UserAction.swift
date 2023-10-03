@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import ReSwiftSaga
+import ReSwift
 
-protocol UserAction: SagaAction {}
+protocol UserAction: Action {}
 
 struct RequestUser: UserAction {
     let userID: String
