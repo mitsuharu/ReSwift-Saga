@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import ReSwift
 
-private struct Sagable: SagaAction {}
+private struct Sagable: Action {}
 
 /**
  引き数に指定された Action を Store に発行します。
@@ -22,7 +23,7 @@ private struct Sagable: SagaAction {}
  }
  ```
  */
-public func put(_ action: SagaAction) async throws {
+public func put(_ action: Action) async throws {
     guard let dispatch = InternalBridge.shared.dispatch else{
         throw SagaError.middlewareFailed(message: "SagaMiddleware has not prepared dispatch.")
     }
@@ -70,7 +71,7 @@ public func selector<State, T>(_ selector: (State) -> T) async throws -> T {
  ```
  */
 @discardableResult
-public func call<T>(_ effect: @escaping Saga<T>, _ arg: SagaAction) async rethrows -> T {
+public func call<T>(_ effect: @escaping Saga<T>, _ arg: Action) async rethrows -> T {
     return try await effect(arg)
 }
 
@@ -98,7 +99,7 @@ public func call<T>(_ effect: @escaping Saga<T>) async rethrows -> T {
  }
  ```
  */
-public func fork<T>(_ effect: @escaping Saga<T>, _ arg: SagaAction) async rethrows -> Void {
+public func fork<T>(_ effect: @escaping Saga<T>, _ arg: Action) async rethrows -> Void {
     Task.detached{
         let _ = try await effect(arg)
     }
@@ -121,7 +122,7 @@ public func fork<T>(_ effect: @escaping Saga<T>) async rethrows -> Void {
  ```
  */
 @discardableResult
-public func take(_ actionType: SagaAction.Type) async -> SagaAction {
+public func take(_ actionType: Action.Type) async -> Action {
     return await withCheckedContinuation { continuation in
         InternalBridge.shared.take(actionType) { action in
             continuation.resume(returning: action)
@@ -141,7 +142,7 @@ public func take(_ actionType: SagaAction.Type) async -> SagaAction {
  takeEvery(Increase.self, saga: increaseSaga)
  ```
  */
-public func takeEvery<T>( _ actionType: SagaAction.Type, saga: @escaping Saga<T>) {
+public func takeEvery<T>( _ actionType: Action.Type, saga: @escaping Saga<T>) {
     Task.detached {
         while true {
             let action = await take(actionType)
@@ -163,7 +164,7 @@ public func takeEvery<T>( _ actionType: SagaAction.Type, saga: @escaping Saga<T>
  takeLatest(Increase.self, saga: increaseSaga)
  ```
  */
-public func takeLatest<T>( _ actionType: SagaAction.Type, saga: @escaping Saga<T>) {
+public func takeLatest<T>( _ actionType: Action.Type, saga: @escaping Saga<T>) {
     let buffer = Buffer()
     Task.detached {
         while true {
@@ -190,7 +191,7 @@ public func takeLatest<T>( _ actionType: SagaAction.Type, saga: @escaping Saga<T
  takeLatest(Increase.self, saga: increaseSaga)
  ```
  */
-public func takeLeading<T>( _ actionType: SagaAction.Type, saga: @escaping Saga<T>) {
+public func takeLeading<T>( _ actionType: Action.Type, saga: @escaping Saga<T>) {
     let buffer = Buffer()
     Task.detached {
         while true {

@@ -16,10 +16,10 @@ struct State {
     }
 }
 
-struct Increase: SagaAction {}
-struct Decrease: SagaAction {}
-struct Move: SagaAction { let count: Int }
-struct Clear: SagaAction {}
+struct Increase: Action {}
+struct Decrease: Action {}
+struct Move: Action { let count: Int }
+struct Clear: Action {}
 
 func reducer(action: Action, state: State?) -> State {
 
