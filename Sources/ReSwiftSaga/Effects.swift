@@ -8,11 +8,11 @@
 import Foundation
 import ReSwift
 
-private struct Sagable: Action {}
+private struct SagaAction: Action {}
 
 /**
  引き数に指定された Action を Store に発行します。
- Saga middlware dispatches Action to the store.
+ Saga middleware dispatches Action to the store.
  
  @example
  ```swift
@@ -34,7 +34,7 @@ public func put(_ action: Action) async throws {
 
 /**
  selector 関数を使って、Store から state を取得します。
- Saga middlware invokes selector on the current Store's state.
+ Saga middleware invokes selector on the current Store's state.
  
  @example
  ```swift
@@ -57,7 +57,7 @@ public func selector<State, T>(_ selector: (State) -> T) async throws -> T {
 
 /**
  Saga 関数とその引き数を指定して実行します。
- Saga middleware calls saga function with argments.
+ Saga middleware calls saga function with arguments.
  
  @example
  ```
@@ -77,7 +77,7 @@ public func call<T>(_ effect: @escaping Saga<T>, _ arg: Action) async rethrows -
 
 @discardableResult
 public func call<T>(_ effect: @escaping Saga<T>) async rethrows -> T {
-    return try await call(effect, Sagable())
+    return try await call(effect, SagaAction())
 }
 
 /**
@@ -106,7 +106,7 @@ public func fork<T>(_ effect: @escaping Saga<T>, _ arg: Action) async rethrows -
 }
 
 public func fork<T>(_ effect: @escaping Saga<T>) async rethrows -> Void {
-    try await fork(effect, Sagable())
+    try await fork(effect, SagaAction())
 }
 
 /**
@@ -122,17 +122,22 @@ public func fork<T>(_ effect: @escaping Saga<T>) async rethrows -> Void {
  ```
  */
 @discardableResult
-public func take(_ actionType: Action.Type) async -> Action {
-    return await withCheckedContinuation { continuation in
-        InternalBridge.shared.take(actionType) { action in
-            continuation.resume(returning: action)
+func take(_ actionType: Action.Type) async -> Action {
+    if #available(iOS 15, macOS 12, *) {
+        let action = await InternalBridge.shared.take(actionType).value
+        return action
+    } else {
+        return await withCheckedContinuation { continuation in
+            InternalBridge.shared.take(actionType) { action in
+                continuation.resume(returning: action)
+            }
         }
     }
 }
 
 /**
  特定の Action が発行されるたびに、引き数で指定した Saga 関数を実行します。
- Each time to dispatch a specific action, it perform "fork" with saga fuction and its action.
+ Each time to dispatch a specific action, it perform "fork" with saga function and its action.
 
  @description
  発行のたびに実行されるので、同処理が重複して実行される場合があります。
