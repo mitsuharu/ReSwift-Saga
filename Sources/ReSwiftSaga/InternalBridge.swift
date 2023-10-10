@@ -20,6 +20,8 @@ final class InternalBridge {
     private let subject = PassthroughSubject<Action, Error>()
     private var subscriptions = [AnyCancellable]()
     
+    private init() { }
+    
     // createSagaMiddleware で Redux 内部の dispatch を取得する
     var dispatch: DispatchFunction? = nil
     
