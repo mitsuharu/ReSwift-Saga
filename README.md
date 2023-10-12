@@ -94,7 +94,7 @@ struct StoreUserName: UserAction {
 
 ```swift
 let userSaga: Saga = { _ in
-    takeEvery(RequestUser.self, saga: requestUserSaga)
+    await takeEvery(RequestUser.self, saga: requestUserSaga)
 }
 
 let requestUserSaga: Saga = { action async in
