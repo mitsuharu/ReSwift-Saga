@@ -9,11 +9,15 @@ import Foundation
 import ReSwift
 
 final class UserViewModel: ObservableObject, StoreSubscriber {
+        
+    typealias StoreSubscriberStateType = (userID: String, name: String)
+    
+    @Published private(set) var userID: String = ""
     @Published private(set) var name: String = ""
 
     init() {
         appStore.subscribe(self) {
-            $0.select { selectUserName(store: $0) }
+            $0.select { (selectUserID(store: $0), selectUserName(store: $0)) }
         }
     }
 
@@ -21,8 +25,9 @@ final class UserViewModel: ObservableObject, StoreSubscriber {
         appStore.unsubscribe(self)
     }
 
-    internal func newState(state: String) {
-        self.name = state
+    func newState(state: (userID: String, name: String)) {
+        self.userID = state.userID
+        self.name = state.name
     }
     
     public func requestUser() {
@@ -30,7 +35,8 @@ final class UserViewModel: ObservableObject, StoreSubscriber {
     }
     
     public func showByToast() {
-        let message = "name is " + (name.isEmpty ? "none" : name)
+        let user = userID.isEmpty ? "unknown user" : "ID \(userID)"
+        let message = "\(user)\'s name is " + (name.isEmpty ? "none" : name)
         appStore.dispatch(ShowToast(message: message))
     }
     

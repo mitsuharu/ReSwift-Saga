@@ -7,7 +7,7 @@
 
 import Foundation
 
-func selectUserId(store: AppState) -> String {
+func selectUserID(store: AppState) -> String {
     store.user.userID ?? ""
 }
 
