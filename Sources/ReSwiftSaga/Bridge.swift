@@ -1,5 +1,5 @@
 //
-//  InternalBridge.swift
+//  Bridge.swift
 //  ReSwift-Saga
 //
 //  Created by Mitsuharu Emoto on 2023/08/26.
@@ -10,13 +10,13 @@ import Combine
 import ReSwift
 
 /**
- InternalBridge
+ Bridge
  - Redux と Redux Saga 間のデータ受取を管理する
  - Action の発行や監視を行う
  */
-final class InternalBridge {
+final class Bridge {
     
-    static let shared = InternalBridge()
+    static let shared = Bridge()
     private let subject = PassthroughSubject<Action, Error>()
     private var subscriptions = [AnyCancellable]()
     
@@ -48,9 +48,7 @@ final class InternalBridge {
     @available(iOS 15, macOS 12, *)
     func take(_ actionType: Action.Type) -> Future <Action, Never> {
         return Future { [weak self] promise in
-            guard let self = self else {
-                return
-            }
+            guard let self else { return }
             self.subject.filter {
                 type(of: $0) == actionType
             }.sink { [weak self] in
@@ -89,9 +87,9 @@ final class InternalBridge {
     private func complete(_ completion: Subscribers.Completion<Error>){
         switch completion {
         case .finished:
-            print("InternalBridge#complete finished")
+            print("Bridge#complete finished")
         case .failure(let error):
-            assertionFailure("InternalBridge#complete failure \(error)")
+            assertionFailure("Bridge#complete failure \(error)")
         }
     }
 }
