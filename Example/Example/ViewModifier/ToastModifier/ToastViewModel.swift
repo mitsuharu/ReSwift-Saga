@@ -11,6 +11,8 @@ final class ToastViewModel: ObservableObject {
 
     static let shared = ToastViewModel()
     
+    private init() { }
+    
     @Published var showToast: Bool = false
     private(set) var message: String = ""
 

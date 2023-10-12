@@ -24,7 +24,7 @@ private struct SagaAction: Action {}
  ```
  */
 public func put(_ action: Action) async throws {
-    guard let dispatch = InternalBridge.shared.dispatch else{
+    guard let dispatch = Bridge.shared.dispatch else{
         throw SagaError.middlewareFailed(message: "SagaMiddleware has not prepared dispatch.")
     }
     Task.detached { @MainActor in
@@ -47,7 +47,7 @@ public func put(_ action: Action) async throws {
  */
 public func selector<State, T>(_ selector: (State) -> T) async throws -> T {
     guard
-        let getState = InternalBridge.shared.getState,
+        let getState = Bridge.shared.getState,
         let state = getState() as? State else
     {
         throw SagaError.middlewareFailed(message: "SagaMiddleware has not prepared getState.")
@@ -124,11 +124,11 @@ public func fork<T>(_ effect: @escaping Saga<T>) async rethrows -> Void {
 @discardableResult
 func take(_ actionType: Action.Type) async -> Action {
     if #available(iOS 15, macOS 12, *) {
-        let action = await InternalBridge.shared.take(actionType).value
+        let action = await Bridge.shared.take(actionType).value
         return action
     } else {
         return await withCheckedContinuation { continuation in
-            InternalBridge.shared.take(actionType) { action in
+            Bridge.shared.take(actionType) { action in
                 continuation.resume(returning: action)
             }
         }
