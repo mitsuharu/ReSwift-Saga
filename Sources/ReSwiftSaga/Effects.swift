@@ -144,10 +144,10 @@ func take(_ actionType: Action.Type) async -> Action {
  
  @example
  ```swift
- takeEvery(Increase.self, saga: increaseSaga)
+ await takeEvery(Increase.self, saga: increaseSaga)
  ```
  */
-public func takeEvery<T>( _ actionType: Action.Type, saga: @escaping Saga<T>) {
+public func takeEvery<T>( _ actionType: Action.Type, saga: @escaping Saga<T>) async {
     Task.detached {
         while true {
             let action = await take(actionType)
@@ -166,10 +166,10 @@ public func takeEvery<T>( _ actionType: Action.Type, saga: @escaping Saga<T>) {
  
  @example
  ```swift
- takeLatest(Increase.self, saga: increaseSaga)
+ await takeLatest(Increase.self, saga: increaseSaga)
  ```
  */
-public func takeLatest<T>( _ actionType: Action.Type, saga: @escaping Saga<T>) {
+public func takeLatest<T>( _ actionType: Action.Type, saga: @escaping Saga<T>) async {
     let buffer = Buffer()
     Task.detached {
         while true {
@@ -193,10 +193,10 @@ public func takeLatest<T>( _ actionType: Action.Type, saga: @escaping Saga<T>) {
  
  @example
  ```swift
- takeLatest(Increase.self, saga: increaseSaga)
+ await takeLeading(Increase.self, saga: increaseSaga)
  ```
  */
-public func takeLeading<T>( _ actionType: Action.Type, saga: @escaping Saga<T>) {
+public func takeLeading<T>( _ actionType: Action.Type, saga: @escaping Saga<T>) async {
     let buffer = Buffer()
     Task.detached {
         while true {

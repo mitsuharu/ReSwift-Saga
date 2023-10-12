@@ -9,7 +9,7 @@ import Foundation
 import ReSwiftSaga
 
 let userSaga: Saga = { _ in
-    takeLeading(RequestUser.self, saga: requestUserSaga)
+    await takeLeading(RequestUser.self, saga: requestUserSaga)
 }
 
 let requestUserSaga: Saga = { action async in

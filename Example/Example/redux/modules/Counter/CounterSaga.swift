@@ -9,9 +9,9 @@ import Foundation
 import ReSwiftSaga
 
 let counterSaga: Saga = { _ in
-    takeEvery(Increase.self, saga: increaseSaga)
-    takeLatest(Decrease.self, saga: decreaseSaga)
-    takeLeading(Assign.self, saga: assignSaga)
+    await takeEvery(Increase.self, saga: increaseSaga)
+    await takeLatest(Decrease.self, saga: decreaseSaga)
+    await takeLeading(Assign.self, saga: assignSaga)
 }
 
 private let increaseSaga: Saga = { action async in
