@@ -17,7 +17,8 @@ let package = Package(
     targets: [
         .target(
             name: "ReSwiftSaga",
-            dependencies: ["ReSwift"]),
+            dependencies: ["ReSwift"],
+            resources: [.copy("PrivacyInfo.xcprivacy")]),
         .testTarget(
             name: "ReSwiftSagaTests",
             dependencies: ["ReSwiftSaga"]),
