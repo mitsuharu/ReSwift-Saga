@@ -1,6 +1,11 @@
 ReSwift-Saga
 ==
 
+> [!WARNING]
+> **このライブラリの開発は終了しました。**
+>
+> 後継の [swift-redux-saga](https://github.com/mitsuharu/swift-redux-saga) を使ってください。Swift 6（strict concurrency）に対応し、Redux 本体（Redux Toolkit を参考にした実装）も含めて作り直したライブラリです。ReSwift / ReSwift-Saga からの移行は[移行ガイド](https://github.com/mitsuharu/swift-redux-saga/blob/main/docs/migration.md)を参照してください。
+
 - ReSwift 向けに [Redux Saga](https://redux-saga.js.org/) を再現したプロジェクトです
 - 完全再現ではなく、設計思想を参考にしつつ、一部機能を再現しています
 
